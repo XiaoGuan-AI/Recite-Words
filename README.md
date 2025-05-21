@@ -10,6 +10,8 @@
 
 ### 软件主页面
 <img src="custom_vocabulary_master/screenshots/1.png" width="400"/> 
+
+
 ### 休息提醒
 <img src="custom_vocabulary_master/screenshots/2.png" width="400"/>
 
