@@ -49,7 +49,7 @@ custom_vocabulary_master
 ├── app.log/             # 项目日志
 
 
-````
+```
 
 ---
 
@@ -61,7 +61,7 @@ custom_vocabulary_master
 后端依赖：
 ```bash
 pip install -r backend/requirements.txt
-````
+```
 
 或手动安装：
 
