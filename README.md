@@ -9,11 +9,9 @@
 ## 📸 项目预览
 
 ### 软件主页面
-![image](custom_vocabulary_master/screenshots/1.png)
-
-
+<img src="custom_vocabulary_master/screenshots/1.png" width="400"/> 
 ### 休息提醒
-![image](custom_vocabulary_master/screenshots/2.png)
+<img src="custom_vocabulary_master/screenshots/2.png" width="400"/>
 
 ---
 
@@ -25,7 +23,7 @@
   - 🧩 填空模式（测试理解）
   - ✍️ 拼写模式（锻炼输入记忆）
 - 📅 **任务计划功能**：可设置每日学习任务量（例如每天记忆 20 个单词）
-- ⏰ **提醒功能**：支持自定义设置休息提醒时间，可自定义休息时长
+- ⏰ **提醒功能**：支持自定义设置每日提醒时间
 - 🧠 **自动记忆状态**：保存学习进度、记忆情况与最高得分
 - 🧑‍💻 **前后端分离**：基于 Flask 后端 + 静态前端，支持本地部署或服务化部署
 
@@ -76,8 +74,8 @@ pip install flask flask-socketio flask-cors eventlet
 ### 1. 克隆项目
 
 ```bash
-git clone https://github.com/你的用户名/custom_vocabulary_master.git
-cd custom_vocabulary_master
+git clone https://github.com/XiaoGuan-AI/Recite-Words.git
+cd Recite-Words
 ```
 
 ### 2. 启动后端服务
