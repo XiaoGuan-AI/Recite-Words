@@ -1,14 +1,17 @@
 
 # 🧠 小关记单词 · Recite-Words
 
-一个轻量级但功能强大的记单词神器，支持自定义词库、三种记忆模式、任务计划与每日提醒  
+一个轻量级但功能强大的记单词神器，支持自定义词库、三种记忆模式、任务计划与休息提醒  
 基于 Flask + Socket.IO 构建，适合所有英语学习者 🎯
 
 ---
 
 ## 📸 项目预览
 
-<img src="screenshots/demo1.png" width="400"/> <img src="screenshots/demo2.png" width="400"/>
+### 软件主页面
+<img src="screenshots/1.png" width="400"/> 
+### 休息提醒
+<img src="screenshots/2.png" width="400"/>
 
 ---
 
@@ -30,7 +33,7 @@
 
 ```
 
-custom\_vocabulary\_master/
+custom_vocabulary_master
 ├── backend/                 # Flask + SocketIO 后端服务
 │   ├── app.py              # 主服务入口
 │   └── requirements.txt    # 后端依赖
@@ -38,9 +41,11 @@ custom\_vocabulary\_master/
 │   ├── index.html
 │   ├── css/
 │   ├── js/
-│   └── assets/             # 音效、图片、词库等资源
-├── vocabulary/              # 用户导入的词库文件夹（支持 txt/csv）
 ├── screenshots/             # 项目截图（可选）
+├── vocabulary/              # 用户导入的词库文件夹（支持 txt/csv）
+│   ├── CET6_edited.txt    #六级单词库  
+├── app.log/             # 项目日志
+
 
 ````
 
@@ -154,13 +159,9 @@ http://localhost:5000
 
 ---
 
-## 📄 License
-
-MIT License - 自由使用、自由分享
-
 ---
 
-## ✨ 开发者
+## ✨ 开发者（Developer: Jia'nan Zhao | Version: v1.5）
 
 这个项目是我为自己背单词开发的轻量工具，希望也能帮到你们。
 有建议或想法欢迎提 Issue 或 PR 🙌
@@ -169,7 +170,7 @@ MIT License - 自由使用、自由分享
 
 ![Python](https://img.shields.io/badge/python-3.7%2B-blue)
 ![Flask](https://img.shields.io/badge/framework-Flask-yellow)
-![License](https://img.shields.io/github/license/你的用户名/custom_vocabulary_master)
+
 
 ```
 
