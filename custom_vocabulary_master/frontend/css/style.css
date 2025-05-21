@@ -1,0 +1,616 @@
+
+/* custom_vocabulary_master/frontend/css/style.css */
+/* 填空模式样式 */
+#fillBlankMode {
+    animation: fadeIn 0.5s ease-out;
+}
+
+#sentenceDisplay {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#fillBlankInput {
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+}
+
+#fillBlankInput:focus {
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+    border-color: #6366f1;
+}
+
+#hintDisplay {
+    opacity: 0.8;
+    font-style: italic;
+}
+
+/* 拼写模式样式 */
+#spellingMode {
+    animation: slideUp 0.5s ease-out;
+}
+
+#meaningForSpelling {
+    font-size: 1.25rem;
+    background: linear-gradient(90deg, #f0f9ff 0%, #ffffff 50%, #f0f9ff 100%);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#spellingInput {
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    text-transform: lowercase;
+}
+
+#spellingInput:focus {
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    border-color: #3b82f6;
+}
+
+/* 答案提示区域样式 */
+.answer-hint {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.3s ease-out;
+    display: none;
+}
+
+.answer-hint.show {
+    display: block;
+}
+
+.answer-hint.correct {
+    border-left: 4px solid #10b981;
+}
+
+.answer-hint.incorrect {
+    border-left: 4px solid #ef4444;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from { 
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+    #sentenceDisplay, #meaningForSpelling {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+    
+    #fillBlankInput, #spellingInput {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+
+    .answer-hint {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+}
+
+/* 模式切换按钮样式 */
+.active-mode {
+    background-color: rgba(99, 102, 241, 0.2) !important;
+    border: 1px solid rgba(99, 102, 241, 0.5);
+    transform: scale(1.05);
+}
+
+/* 编辑按钮样式 */
+#editWordBtn {
+    transition: all 0.3s ease;
+    background-color: rgba(255, 193, 7, 0.2);
+    border: 1px solid rgba(255, 193, 7, 0.5);
+}
+
+#editWordBtn:hover {
+    background-color: rgba(255, 193, 7, 0.4);
+    transform: rotate(15deg);
+}
+
+/* 编辑模态框样式 */
+#editWordModal {
+    animation: fadeIn 0.3s ease-out;
+}
+
+#editWordModal .bg-white {
+    animation: slideIn 0.4s ease-out;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+#editWordInput, #editMeaningInput {
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef;
+}
+
+#editWordInput:focus, #editMeaningInput:focus {
+    border-color: #4cc9f0;
+    box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.3);
+}
+
+/* 删除按钮样式 */
+#deleteWordBtn {
+    background-color: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.5);
+    transition: all 0.3s ease;
+}
+
+#deleteWordBtn:hover {
+    background-color: rgba(220, 53, 69, 0.3);
+    transform: scale(1.05);
+}
+
+/* 保存按钮样式 */
+#saveWordBtn {
+    background-color: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.5);
+    transition: all 0.3s ease;
+}
+
+#saveWordBtn:hover {
+    background-color: rgba(40, 167, 69, 0.3);
+    transform: scale(1.05);
+}
+
+/* 编辑模态框响应式设计 */
+@media (max-width: 640px) {
+    #editWordModal .bg-white {
+        width: 90%;
+        padding: 1rem;
+    }
+    
+    #editWordInput, #editMeaningInput {
+        padding: 0.75rem;
+    }
+    
+    #deleteWordBtn, #saveWordBtn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 工具提示样式 */
+.tooltip {
+    position: relative;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 开发者信息样式 */
+.developer-info {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.developer-info:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scale(1.05);
+}
+
+/* 烟花效果容器 */
+#fireworks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    overflow: hidden;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* 烟花基本样式 */
+.firework {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform-origin: center;
+    animation: explosion 1.5s ease-out forwards;
+}
+
+.particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    animation: particle 1.5s ease-out forwards;
+    transform-origin: center;
+}
+
+/* 烟花爆炸动画 */
+@keyframes explosion {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    35% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* 烟花粒子动画 */
+@keyframes particle {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+
+/* 为每个粒子设置不同的方向 */
+.particle:nth-child(1) { --x: 50px; --y: -50px; }
+.particle:nth-child(2) { --x: 50px; --y: 50px; }
+.particle:nth-child(3) { --x: -50px; --y: -50px; }
+.particle:nth-child(4) { --x: -50px; --y: 50px; }
+.particle:nth-child(5) { --x: 70px; --y: 0px; }
+.particle:nth-child(6) { --x: -70px; --y: 0px; }
+.particle:nth-child(7) { --x: 0px; --y: 70px; }
+.particle:nth-child(8) { --x: 0px; --y: -70px; }
+.particle:nth-child(9) { --x: 50px; --y: -20px; }
+.particle:nth-child(10) { --x: -50px; --y: -20px; }
+.particle:nth-child(11) { --x: 20px; --y: 50px; }
+.particle:nth-child(12) { --x: -20px; --y: -50px; }
+
+/* 祝贺信息样式 */
+.congrats-message {
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+    margin-top: 2rem;
+    background: linear-gradient(45deg, #ff8a00, #e52e71, #2191fd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: pulse 2s infinite;
+    font-weight: bold;
+    z-index: 1001;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(5px);
+    max-width: 90%;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* 关闭烟花按钮 */
+.close-fireworks-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1002;
+}
+
+.close-fireworks-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+/* 显示/隐藏烟花容器 */
+#fireworks-container {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    pointer-events: auto;
+}
+
+#fireworks-container:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .congrats-message {
+        font-size: 1.5rem;
+        padding: 0.75rem;
+    }
+    
+    .close-fireworks-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+    }
+    
+    .firework {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .particle {
+        width: 4px;
+        height: 4px;
+    }
+}
+
+/* 休息提示弹窗样式 */
+#restModal {
+    animation: fadeIn 0.3s ease-out;
+    z-index: 1050;
+}
+
+#restModal .bg-white {
+    animation: bounceIn 0.5s ease-out;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    max-width: 90%;
+    width: 400px;
+}
+
+.rest-modal-content {
+    position: relative;
+    overflow: hidden;
+}
+
+.rest-modal-content::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(99, 102, 241, 0.1), rgba(99, 102, 241, 0.05));
+    z-index: -1;
+}
+
+.rest-modal-content::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: -60px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(99, 102, 241, 0.05), rgba(99, 102, 241, 0.02));
+    z-index: -1;
+}
+
+/* 休息计时器样式 */
+.rest-timer {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4f46e5;
+    font-family: 'Courier New', monospace;
+    background: rgba(99, 102, 241, 0.1);
+    border-radius: 0.75rem;
+    padding: 0.5rem 1.5rem;
+    display: inline-block;
+    letter-spacing: 0.1em;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 10px rgba(99, 102, 241, 0.2);
+}
+
+#skipRestBtn {
+    transition: all 0.3s ease;
+}
+
+#skipRestBtn:hover {
+    background-color: #9ca3af;
+    transform: translateY(-1px);
+}
+
+#startRestBtn {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#startRestBtn:hover {
+    background-color: #4338ca;
+    transform: translateY(-1px);
+}
+
+#startRestBtn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.2),
+        rgba(255, 255, 255, 0)
+    );
+    transform: rotate(30deg);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#startRestBtn:hover::after {
+    opacity: 1;
+    animation: shine 1.5s forwards;
+}
+
+/* 设置面板中的休息时长输入样式 */
+#restDurationInput {
+    transition: all 0.3s ease;
+    border: 2px solid #e9ecef;
+    font-size: 1rem;
+}
+
+#restDurationInput:focus {
+    border-color: #4cc9f0;
+    box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.3);
+    outline: none;
+}
+
+#restDurationInput::-webkit-inner-spin-button, 
+#restDurationInput::-webkit-outer-spin-button { 
+    opacity: 1;
+    height: 24px;
+}
+
+/* 设置面板中的休息时长说明文字样式 */
+#settingsModal .text-xs.text-gray-500 {
+    line-height: 1.4;
+    margin-top: 0.25rem;
+    font-style: italic;
+    color: #6b7280;
+}
+
+@keyframes shine {
+    from {
+        transform: translateX(-100%) rotate(30deg);
+    }
+    to {
+        transform: translateX(100%) rotate(30deg);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 640px) {
+    #restModal .bg-white {
+        width: 90%;
+        padding: 1rem;
+    }
+    
+    .rest-timer {
+        font-size: 2rem;
+        padding: 0.3rem 1rem;
+    }
+    
+    #skipRestBtn, #startRestBtn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    #restDurationInput {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

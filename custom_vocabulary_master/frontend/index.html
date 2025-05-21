@@ -1,0 +1,285 @@
+
+<!-- custom_vocabulary_master/frontend/index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>小关记单词</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-800 min-h-screen flex flex-col">
+    <div id="particles-js" class="absolute inset-0 z-0"></div>
+    
+    <header class="relative z-10 p-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold tracking-wider">小关记单词</h1>
+        <div class="flex space-x-3">
+            <button id="settingsBtn" class="bg-white bg-opacity-20 hover:bg-opacity-30 transition p-2 rounded-full tooltip" data-tooltip="设置">
+                <i class="fas fa-cog text-xl"></i>
+            </button>
+            <button id="importBtn" class="bg-white bg-opacity-20 hover:bg-opacity-30 transition p-2 rounded-full tooltip" data-tooltip="导入">
+                <i class="fas fa-file-import text-xl"></i>
+            </button>
+        </div>
+    </header>
+    
+    <main class="relative z-10 flex-grow flex flex-col items-center justify-center p-4">
+        <!-- 欢迎界面 -->
+        <div id="welcomeView" class="text-center max-w-md mx-auto">
+            <h2 class="text-3xl font-bold mb-6">欢迎使用小关记单词</h2>
+            <p class="mb-8">积累：每天进步一点点</p>
+            <div class="flex flex-col space-y-4">
+                <button id="startLearningBtn" class="py-3 px-6 bg-gradient-to-r from-green-400 to-blue-500 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                    开始学习
+                </button>
+                <button id="welcomeImportBtn" class="py-3 px-6 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg shadow transition">
+                    导入单词本
+                </button>
+            </div>
+        </div>
+        
+        <!-- 学习界面 -->
+        <div id="learningView" class="w-full max-w-md mx-auto hidden">
+            <!-- 进度显示 -->
+            <div class="mb-6 flex justify-between items-center">
+                <div class="text-sm">
+                    今日进度: <span id="progressCount">0/0</span>
+                </div>
+                <div class="text-sm">
+                    剩余: <span id="remainingCount">0</span>
+                </div>
+            </div>
+            
+            <!-- 单词卡片区域 -->
+            <div id="wordCard" class="bg-white text-gray-800 rounded-xl shadow-2xl p-6 mb-8 min-h-64 flex flex-col items-center justify-center transition-all duration-500 transform hover:scale-105">
+                <!-- 闪卡模式 -->
+                <div id="flashcardMode" class="w-full">
+                    <div class="text-center">
+                        <h3 id="wordDisplay" class="text-3xl font-bold mb-4">单词</h3>
+                        <p id="meaningDisplay" class="text-xl hidden">释义</p>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <button id="showMeaningBtn" class="py-2 px-4 bg-indigo-600 text-white rounded-lg">
+                            显示释义
+                        </button>
+                        <button id="editWordBtn" class="py-2 px-4 ml-2 bg-gray-600 text-white rounded-lg">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 填空模式 -->
+                <div id="fillBlankMode" class="w-full hidden">
+                    <div class="text-center mb-6">
+                        <p id="sentenceDisplay" class="text-xl mb-4">这是一个包含_____的句子。</p>
+                        <div class="text-sm text-gray-500" id="hintDisplay">提示: 单词首字母为<span id="firstLetter">A</span>, 共<span id="wordLength">5</span>个字母</div>
+                    </div>
+                    <div class="mb-6">
+                        <input type="text" id="fillBlankInput" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="请输入单词">
+                    </div>
+                    <div class="flex justify-center space-x-3">
+                        <button id="revealAnswerBtn" class="py-2 px-4 bg-yellow-500 text-white rounded-lg">
+                            显示答案
+                        </button>
+                        <button id="checkFillBlankBtn" class="py-2 px-6 bg-indigo-600 text-white rounded-lg">
+                            检查
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 拼写模式 -->
+                <div id="spellingMode" class="w-full hidden">
+                    <div class="text-center mb-6">
+                        <p id="meaningForSpelling" class="text-xl mb-2">单词释义</p>
+                        <div class="text-sm text-gray-500">请根据释义拼写单词</div>
+                    </div>
+                    <div class="mb-6">
+                        <input type="text" id="spellingInput" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="请拼写单词">
+                    </div>
+                    <div class="flex justify-center space-x-3">
+                        <button id="playPronunciationBtn" class="py-2 px-4 bg-blue-500 text-white rounded-lg">
+                            <i class="fas fa-volume-up"></i>
+                        </button>
+                        <button id="checkSpellingBtn" class="py-2 px-6 bg-indigo-600 text-white rounded-lg">
+                            检查
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 操作按钮 -->
+            <div class="flex justify-between mb-8">
+                <button id="knownBtn" class="flex-1 py-3 mr-3 bg-green-500 rounded-lg shadow">
+                    认识
+                </button>
+                <button id="unknownBtn" class="flex-1 py-3 bg-red-500 rounded-lg shadow">
+                    不认识
+                </button>
+            </div>
+            
+            <!-- 学习模式切换 -->
+            <div class="flex justify-center space-x-2 mb-4">
+                <button id="flashcardModeBtn" class="py-2 px-4 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg active-mode">
+                    闪卡模式
+                </button>
+                <button id="fillBlankModeBtn" class="py-2 px-4 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg">
+                    填空模式
+                </button>
+                <button id="spellingModeBtn" class="py-2 px-4 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg">
+                    拼写模式
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 设置弹窗 -->
+    <div id="settingsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white text-gray-800 rounded-xl p-6 max-w-md w-full">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">设置</h3>
+                <button id="closeSettingsBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block mb-2 font-medium">每日学习目标</label>
+                <input type="number" id="dailyGoalInput" class="w-full p-2 border border-gray-300 rounded-lg" min="1" value="20">
+            </div>
+            
+            <div class="mb-6">
+                <label class="block mb-2 font-medium">提醒时间</label>
+                <input type="time" id="reminderTimeInput" class="w-full p-2 border border-gray-300 rounded-lg">
+            </div>
+            
+            <div class="mb-6">
+                <label class="block mb-2 font-medium">休息时长（分钟）</label>
+                <input type="number" id="restDurationInput" class="w-full p-2 border border-gray-300 rounded-lg" min="1" max="60" value="2">
+                <p class="text-xs text-gray-500 mt-1">设置学习过程中的休息时长，建议2-5分钟</p>
+            </div>
+            
+            <div class="flex justify-end">
+                <button id="saveSettingsBtn" class="py-2 px-6 bg-indigo-600 text-white rounded-lg">
+                    保存
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 导入单词本弹窗 -->
+    <div id="importModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white text-gray-800 rounded-xl p-6 max-w-md w-full">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">导入单词本</h3>
+                <button id="closeImportBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <p class="text-sm text-gray-600 mb-4">支持导入TXT或CSV格式文件，每行一个单词，格式为：单词,释义</p>
+                <input type="file" id="fileInput" class="w-full p-2 border border-gray-300 rounded-lg" accept=".txt,.csv">
+                <div id="fileError" class="text-red-500 text-sm mt-2 hidden"></div>
+            </div>
+            
+            <div class="flex justify-end">
+                <button id="confirmImportBtn" class="py-2 px-6 bg-indigo-600 text-white rounded-lg">
+                    导入
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑单词弹窗 -->
+    <div id="editWordModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white text-gray-800 rounded-xl p-6 max-w-md w-full">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold">编辑单词</h3>
+                <button id="closeEditWordBtn" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="mb-6">
+                <label class="block mb-2 font-medium">单词</label>
+                <input type="text" id="editWordInput" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            
+            <div class="mb-6">
+                <label class="block mb-2 font-medium">释义</label>
+                <input type="text" id="editMeaningInput" class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            
+            <div class="flex justify-end space-x-3">
+                <button id="deleteWordBtn" class="py-2 px-6 bg-red-500 text-white rounded-lg">
+                    删除
+                </button>
+                <button id="saveWordBtn" class="py-2 px-6 bg-indigo-600 text-white rounded-lg">
+                    保存
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 提示弹窗 -->
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-lg hidden">
+        <span id="toastMessage"></span>
+    </div>
+    
+    <!-- 烟花效果容器 -->
+    <div id="fireworks-container" class="fixed inset-0 z-50 hidden">
+        <!-- 烟花效果和祝贺信息将通过JavaScript动态添加 -->
+    </div>
+    
+    <!-- 开发者信息 -->
+    <div class="fixed bottom-4 right-4 text-xs text-gray-500 bg-white bg-opacity-50 px-3 py-1 rounded-full z-10">
+        Developer: Jia'nan Zhao | Version: v1.5
+    </div>
+    
+    <script src="https://cdn.bootcdn.net/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="js/fileHandler.js"></script>
+    <script src="js/reminder.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // 初始化粒子效果
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                particles: {
+                    number: { value: 60, density: { enable: true, value_area: 1000 } },
+                    color: { value: "#4a86e8" },
+                    shape: { type: "circle" },
+                    opacity: { value: 0.3, random: true },
+                    size: { value: 2.5, random: true },
+                    line_linked: {
+                        enable: true,
+                        distance: 200,
+                        color: "#4a86e8",
+                        opacity: 0.2,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1.5,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "out",
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: { enable: true, mode: "grab" },
+                        onclick: { enable: true, mode: "push" },
+                        resize: true
+                    }
+                },
+                retina_detect: true
+            });
+        });
+    </script>
+</body>
+</html>
