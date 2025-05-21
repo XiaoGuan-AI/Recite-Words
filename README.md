@@ -1,5 +1,5 @@
 
-# 🧠 小关记单词 · Custom Vocabulary Master
+# 🧠 小关记单词 · Recite-Words
 
 一个轻量级但功能强大的记单词神器，支持自定义词库、三种记忆模式、任务计划与每日提醒  
 基于 Flask + Socket.IO 构建，适合所有英语学习者 🎯
